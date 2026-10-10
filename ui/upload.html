@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Upload bills</title>
+<style>
+  :root {
+    --bg: var(--color-background-primary, #ffffff);
+    --fg: var(--color-text-primary, #1f1f1f);
+    --muted: var(--color-text-secondary, #6b6b6b);
+    --border: var(--color-border-primary, #d9d9d9);
+    --accent: #c96442;
+    --ok: #2e7d32;
+    --err: #c62828;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: var(--color-background-primary, #262624);
+      --fg: var(--color-text-primary, #f0eee6);
+      --muted: var(--color-text-secondary, #a8a59c);
+      --border: var(--color-border-primary, #44423d);
+      --ok: #81c784;
+      --err: #ef9a9a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: var(--color-background-primary, #262624);
+    --fg: var(--color-text-primary, #f0eee6);
+    --muted: var(--color-text-secondary, #a8a59c);
+    --border: var(--color-border-primary, #44423d);
+    --ok: #81c784;
+    --err: #ef9a9a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 16px;
+    background: var(--bg);
+    color: var(--fg);
+    font: 14px/1.45 var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  }
+  h1 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  p.sub { margin: 0 0 12px; color: var(--muted); font-size: 13px; }
+  .drop {
+    border: 1.5px dashed var(--border);
+    border-radius: 10px;
+    padding: 28px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .drop:hover, .drop:focus-visible, .drop.over { border-color: var(--accent); outline: none; }
+  .drop.over { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  .drop strong { color: var(--accent); }
+  .drop small { display: block; margin-top: 4px; color: var(--muted); }
+  ul { list-style: none; margin: 12px 0 0; padding: 0; }
+  li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  label { display: block; margin-top: 12px; font-size: 13px; font-weight: 600; }
+  label .req { color: var(--err); }
+  select, textarea {
+    display: block;
+    width: 100%;
+    margin-top: 4px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--fg);
+    font: inherit;
+  }
+  textarea { min-height: 64px; resize: vertical; }
+  select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .hint { margin-top: 4px; color: var(--muted); font-size: 12px; }
+  .state { color: var(--muted); flex-shrink: 0; }
+  .ok { color: var(--ok); }
+  .err { color: var(--err); }
+  button {
+    margin-top: 12px;
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:disabled { opacity: .45; cursor: default; }
+  .status { margin-top: 8px; font-size: 13px; }
+</style>
+</head>
+<body>
+  <h1>Claim bills · Nighthack portal</h1>
+  <p class="sub">Your file goes straight to your local server. Nothing is submitted until you confirm.</p>
+  <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose bill files">
+    <strong>Drop bills here</strong> or click to choose
+    <small>PDF, JPG, PNG, WEBP, HEIC · up to 20 MB · bills dated this month</small>
+  </div>
+  <input type="file" id="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.heic" multiple hidden />
+  <ul id="list"></ul>
+  <label for="bill-type">Bill Type <span class="req">*</span></label>
+  <select id="bill-type" required></select>
+  <label for="purpose">Purpose of Expense <span class="req">*</span></label>
+  <textarea id="purpose" required placeholder="e.g. Team dinner after release"></textarea>
+  <div class="hint">Each bill is claimed separately with this bill type and purpose.</div>
+  <button id="send" disabled>Claim this bill</button>
+  <div class="status" id="status" role="status"></div>
+  <script type="module">/*__BUNDLE__*/</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "nht-mcp",
+  "version": "1.0.0",
+  "description": "Claude Desktop MCP server that files expense claims on the Nighthack Associate Portal from bill photos and PDFs. Runs on macOS, Windows and Linux.",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "prepare": "node build.mjs",
+    "build": "node build.mjs",
+    "setup": "node scripts/setup.mjs",
+    "uninstall-claude": "node scripts/setup.mjs --remove"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "@napi-rs/canvas": "^1.0.11",
+    "heic-convert": "^2.1.0",
+    "pdfjs-dist": "^6.4.299",
+    "playwright": "^1.64.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "license": "ISC"
+}
