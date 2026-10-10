@@ -1,6 +1,6 @@
 # nht-mcp
 
-File expense claims on the [Nighthack Associate Portal](https://portal.nighthack.in) from Claude Desktop. Drop your bill photos or PDFs into the chat, pick a bill type, type a purpose, and Claude reads each bill and fills in a claim for it. Nothing is submitted until you confirm.
+File expense claims on the Nighthack Associate Portal from Claude Desktop. Drop your bill photos or PDFs into the chat, pick a bill type, type a purpose, and Claude reads each bill and fills in a claim for it. Nothing is submitted until you confirm.
 
 Works on macOS, Windows and Linux.
 
